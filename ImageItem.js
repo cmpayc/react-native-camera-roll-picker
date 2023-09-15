@@ -19,14 +19,22 @@ const styles = StyleSheet.create({
 });
 
 class ImageItem extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imageSize: 0
+    };
+  }
+  componentDidMount() {
     let { width } = Dimensions.get('window');
     const { imageMargin, imagesPerRow, containerWidth } = this.props;
 
     if (typeof containerWidth !== 'undefined') {
       width = containerWidth;
     }
-    this.imageSize = (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow;
+    this.setState({
+      imageSize: (width - (imagesPerRow + 1) * imageMargin) / imagesPerRow
+    })
   }
 
   handleClick(item) {
@@ -52,7 +60,7 @@ class ImageItem extends Component {
       >
         <Image
           source={{ uri: image.uri }}
-          style={{ height: this.imageSize, width: this.imageSize }}
+          style={{ height: this.state.imageSize, width: this.state.imageSize }}
         />
         {(selected) ? marker : null}
       </TouchableOpacity>
