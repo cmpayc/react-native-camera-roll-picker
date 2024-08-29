@@ -1,3 +1,4 @@
+import { TextPropTypes } from 'deprecated-react-native-prop-types';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -272,6 +273,7 @@ class CameraRollPicker extends Component {
       containerWidth={this.props.containerWidth}
       imageMargin={this.props.imageMargin}
       selectedMarker={this.props.selectedMarker}
+      ItemComponent={this.props.ItemComponent}
     />);
   }
 
@@ -290,6 +292,7 @@ class CameraRollPicker extends Component {
       emptyText,
       emptyTextStyle,
       loader,
+      SelectImagesComponent,
     } = this.props;
 
     if (this.state.initialLoading) {
@@ -315,13 +318,15 @@ class CameraRollPicker extends Component {
       <Text style={[{ textAlign: 'center' }, emptyTextStyle]}>{emptyText}</Text>
     );
 
+    const RealSelectImagesComponent = SelectImagesComponent || SelectImages;
+
     return (
       <View
         style={[styles.wrapper, { padding: imageMargin, paddingRight: 0, backgroundColor }]}
       >
         {flatListOrEmptyText}
         {(this.props.isLimitedView) && (
-          <SelectImages showLimitedScreen={this.props.showLimitedScreen}/>
+          <RealSelectImagesComponent showLimitedScreen={this.props.showLimitedScreen}/>
         )}
       </View>
     );
@@ -354,8 +359,10 @@ CameraRollPicker.propTypes = {
   selectedMarker: PropTypes.element,
   backgroundColor: PropTypes.string,
   emptyText: PropTypes.string,
-  emptyTextStyle: Text.propTypes.style,
+  emptyTextStyle: TextPropTypes.style,
   loader: PropTypes.node,
+  ItemComponent: PropTypes.node,
+  SelectImagesComponent: PropTypes.node,
 };
 
 CameraRollPicker.defaultProps = {

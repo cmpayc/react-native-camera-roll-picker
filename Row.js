@@ -29,9 +29,11 @@ class Row extends PureComponent {
     } = this.props;
 
     const { uri } = item.node.image;
+    const { ItemComponent } = this.props;
+    const RealImageComponent = ItemComponent || ImageItem;
 
     return (
-      <ImageItem
+      <RealImageComponent
         key={uri}
         item={item}
         selected={isSelected}
