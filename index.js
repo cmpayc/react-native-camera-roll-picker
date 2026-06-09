@@ -167,7 +167,9 @@ class CameraRollPicker extends Component {
     if (assets.length == MAX_IMAGES) {
       newState.lastCursor = data.page_info.end_cursor;
     }
-
+    if (this.props.initialSelected) {
+      newState.selected = this.props.initialSelected;
+    }
     this.setState(newState);
   }
 
@@ -263,7 +265,7 @@ class CameraRollPicker extends Component {
     const isSelected = item.map((imageItem) => {
       if (!imageItem) return false;
       const { uri } = imageItem.node.image;
-      return arrayObjectIndexOf(this.state.selected, 'uri', uri) >= 0;
+      return this.props.selected ? this.props.selected.indexOf(uri) >= 0 : arrayObjectIndexOf(this.state.selected, 'uri', uri) >= 0;
     });
     return (<Row
       rowData={item}
@@ -355,7 +357,7 @@ CameraRollPicker.propTypes = {
   imageMargin: PropTypes.number,
   containerWidth: PropTypes.number,
   callback: PropTypes.func,
-  selected: PropTypes.array,
+  selected: PropTypes.arrayOf(PropTypes.string),
   selectedMarker: PropTypes.element,
   backgroundColor: PropTypes.string,
   emptyText: PropTypes.string,
@@ -374,7 +376,8 @@ CameraRollPicker.defaultProps = {
   selectSingleItem: false,
   assetType: 'Photos',
   backgroundColor: 'white',
-  selected: [],
+  selected: undefined,
+  initialSelected: undefined,
   callback(selectedImages, currentImage) {
     console.log(currentImage);
     console.log(selectedImages);
