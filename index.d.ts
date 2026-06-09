@@ -43,8 +43,12 @@ export interface CameraRollPickerProps {
   maxImagesReachedCallback?: (isReached: boolean) => void;
   isLimitedView?: boolean;
   showLimitedScreen?: () => void;
-  ItemComponent?: ReactNode;
-  SelectImagesComponent?: ReactNode;
+  ItemComponent?: (props: {
+    item: { node: { image: PickerValue } },
+    selected: boolean,
+    onClick: (image: PickerValue) => void,
+  }) => ReactNode;
+  SelectImagesComponent?: (props: SelectImagesProps) => ReactNode;
 }
 
 export default class CameraRollPicker extends Component<CameraRollPickerProps> {}
