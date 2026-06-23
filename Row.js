@@ -26,6 +26,7 @@ class Row extends PureComponent {
       selectedMarker,
       imagesPerRow,
       containerWidth,
+      extraData,
     } = this.props;
 
     const { uri } = item.node.image;
@@ -41,6 +42,7 @@ class Row extends PureComponent {
         selectedMarker={selectedMarker}
         imagesPerRow={imagesPerRow}
         containerWidth={containerWidth}
+        extraData={extraData}
         onClick={this.props.selectImage}
       />
     );

@@ -275,6 +275,7 @@ class CameraRollPicker extends Component {
       containerWidth={this.props.containerWidth}
       imageMargin={this.props.imageMargin}
       selectedMarker={this.props.selectedMarker}
+      extraData={this.props.extraData}
       ItemComponent={this.props.ItemComponent}
     />);
   }
@@ -365,6 +366,7 @@ CameraRollPicker.propTypes = {
   loader: PropTypes.node,
   ItemComponent: PropTypes.node,
   SelectImagesComponent: PropTypes.node,
+  extraData: PropTypes.any,
 };
 
 CameraRollPicker.defaultProps = {
