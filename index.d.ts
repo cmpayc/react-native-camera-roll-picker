@@ -11,6 +11,10 @@ export interface PickerValue {
   extension: string;
 }
 
+export interface SelectImagesProps {
+  showLimitedScreen: () => void;
+}
+
 export interface CameraRollPickerProps {
   initialNumToRender?: number;
   groupTypes?:
@@ -49,7 +53,7 @@ export interface CameraRollPickerProps {
     extraData: any,
     onClick: (image: PickerValue) => void,
   }) => ReactNode;
-  SelectImagesComponent?: (props: { showLimitedScreen?: boolean }) => ReactNode;
+  SelectImagesComponent?: ({ showLimitedScreen }: SelectImagesProps) => ReactNode;
   extraData?: any,
 }
 
